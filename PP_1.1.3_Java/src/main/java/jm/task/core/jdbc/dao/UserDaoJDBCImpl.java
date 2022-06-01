@@ -35,8 +35,10 @@ public class UserDaoJDBCImpl implements UserDao {
     @Override
     public void saveUser(String name, String lastName, byte age) {
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("INSERT Users (name, lastName, age) VALUES " +
-                     "('" + name + "', '" + lastName + "', " + (age + ")"))) {
+             PreparedStatement preparedStatement = connection.prepareStatement("INSERT Users (name, lastName, age) VALUES (?, ?, ?)")) {
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, lastName);
+            preparedStatement.setByte(3, age);
             System.out.println("Пользователь с именем " + name + "добавлен!");
             preparedStatement.executeUpdate();
         } catch (SQLException sqlException) {
@@ -46,7 +48,8 @@ public class UserDaoJDBCImpl implements UserDao {
     @Override
     public void removeUserById(long id) {
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Users WHERE id = "  + id + ";")) {
+             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM Users WHERE id = ?")) {
+            preparedStatement.setLong(1, id);
             System.out.println("Пользователь " + id + " удалён!");
             preparedStatement.executeUpdate();
         } catch (SQLException sqlException) {
