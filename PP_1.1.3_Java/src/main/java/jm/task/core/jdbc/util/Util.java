@@ -8,7 +8,7 @@ public class Util {
     private static final String hostName = "jdbc:mysql://localhost:3306/test";
     private static final String userName = "root";
     private static final String password = "Ft91Q#hg543%z0";
-    public static Connection connection;
+    private static Connection connection;
 
     public static Connection getConnection() throws SQLException {
         try {
@@ -21,6 +21,3 @@ public class Util {
         return connection;
     }
 }
-
-
-
