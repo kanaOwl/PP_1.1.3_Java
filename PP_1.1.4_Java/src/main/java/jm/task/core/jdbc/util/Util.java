@@ -29,21 +29,15 @@ public class Util {
 
     public static SessionFactory getSessionFactory() {
         if (sessionFactoryUtil == null) {
-            try {
-                Configuration configuration = new Configuration();
-                Properties properties = new Properties();
-                properties.put("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
-                properties.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/test");
-                properties.put("hibernate.connection.username", "root");
-                properties.put("hibernate.connection.password", "Ft91Q#hg543%z0");
-                properties.put("hibernate.show_sql", "true");
-                properties.put("hibernate.current_session_context_class", "thread");
+            Configuration configuration = new Configuration();
+            configuration.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
+            configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/test");
+            configuration.setProperty("hibernate.connection.username", "root");
+            configuration.setProperty("hibernate.connection.password", "Ft91Q#hg543%z0");
+            configuration.setProperty("hibernate.show_sql", "true");
+            configuration.setProperty("hibernate.current_session_context_class", "thread");
 
-                configuration.setProperties(properties);
-                sessionFactoryUtil = configuration.addAnnotatedClass(User.class).buildSessionFactory();
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
+            sessionFactoryUtil = configuration.addAnnotatedClass(User.class).buildSessionFactory();
         }
         return sessionFactoryUtil;
     }
