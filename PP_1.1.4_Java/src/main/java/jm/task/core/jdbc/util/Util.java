@@ -28,7 +28,7 @@ public class Util {
     }
 
     public static SessionFactory getSessionFactory() {
-        if (sessionFactoryUtil == null) {
+        
             Configuration configuration = new Configuration();
             configuration.setProperty("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
             configuration.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/test");
@@ -38,8 +38,7 @@ public class Util {
             configuration.setProperty("hibernate.current_session_context_class", "thread");
 
             sessionFactoryUtil = configuration.addAnnotatedClass(User.class).buildSessionFactory();
-        }
-        return sessionFactoryUtil;
+            return sessionFactoryUtil;
     }
 }
 
