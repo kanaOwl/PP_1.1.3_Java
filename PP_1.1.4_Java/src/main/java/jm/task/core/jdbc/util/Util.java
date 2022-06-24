@@ -15,6 +15,7 @@ public class Util {
     private static final String password = "Ft91Q#hg543%z0";
     private static Connection connection;
     private static SessionFactory sessionFactoryUtil;
+    private static Util INSTANCE;
 
     public static Connection getConnection() throws SQLException {
         try {
@@ -25,6 +26,17 @@ public class Util {
             ex.printStackTrace();
         }
         return connection;
+    }
+    
+    private Util() {
+
+    }
+
+    public static Util getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new Util();
+        }
+        return INSTANCE;
     }
 
     public static SessionFactory getSessionFactory() {
@@ -41,6 +53,3 @@ public class Util {
             return sessionFactoryUtil;
     }
 }
-
-
-
